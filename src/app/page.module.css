@@ -2,3 +2,31 @@
     color: red;
     text-align: center;
 }
+
+
+/* -------------- NavBar ----------------- */
+.container_navBar{
+    background-color: #f0f0f0f7;
+    padding: 15px;
+ }
+    
+    .container_navBar_List_Link{
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: flex-end;
+        align-items: flex-end;
+        gap: 7px;
+    }
+    
+    .List_Link{
+        text-decoration:none;
+        color:blue;
+    }
+    .List_Link_Auth{
+        text-decoration: none;
+        color: #ffffff;
+        background-color: green;
+        padding: 5px;
+        border-radius: 5px;
+        cursor: pointer;
+    }

@@ -22,7 +22,7 @@ async createProduct(){
    },
 
 async getAllProduct(queryData = {} as IGetAllProduct){
-    return instance<IProduct>({
+    return instance<IProduct[]>({
         url: `${PRODUCT}/all`,
         method: 'GET',
         params: queryData
@@ -30,7 +30,7 @@ async getAllProduct(queryData = {} as IGetAllProduct){
 },
 
 async getByidProduct(id: string | number) {
-   return instance<IProductData>({
+   return instance<IProduct>({
     url: `${PRODUCT}/${id}`,
     method: 'GET'
    }); 

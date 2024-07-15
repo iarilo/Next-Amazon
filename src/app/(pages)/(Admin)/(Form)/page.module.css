@@ -1,0 +1,47 @@
+.container{
+    padding: 20px;
+    border: 1px solid green;
+    border-radius: 5px;
+
+}
+.container_form{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    gap: 10px;
+}
+
+
+.container_form_input{
+    padding: 5px;
+    border: 1px solid green;
+    border-radius: 3px;
+    color: blue;
+
+}
+.container_form_btn{
+    background-color: blue;
+    color: #ffffff;
+    border: none;
+    border-radius: 3px;
+    padding: 5px;
+}
+
+.container_btn{
+   display:flex;
+   width: 75%; 
+   justify-content: space-between;
+    align-items: flex-end;
+
+}
+
+.container_btn_login_register{
+
+}
+
+.btn_login_register{
+    border: none;
+    color: blue;
+    background-color: #ffffff;
+    cursor: pointer;
+}

@@ -1,5 +1,5 @@
 import { instance } from "app/api.interceptor";
-import { IUser,IUserData  } from "types/user.interface";
+import { IUser,IUserData  } from "types/type-user.interface";
 
 const USER = 'user'
 

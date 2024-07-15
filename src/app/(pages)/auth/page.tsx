@@ -1,16 +1,23 @@
 import Button from '@/ui/Button'
-import Heading from '@/ui/Heading'
-import Meta from '@/ui/Meta'
+//import Heading from '@/ui/Heading'
+import type { Metadata } from 'next';
 import React, { FC } from 'react'
+
+export const metadata: Metadata = {
+  title: 'AuthComponents',
+ description: 'фронтэнд amazon  на next',
+  
+};
 
 const Auth: FC = () => {
   return (
-    <Meta title ='AuthComponents'> 
-    <Heading>Auth</Heading>
+     <> 
+    <div>Auth</div>
+
      <Button variant='white'>
         auth
      </Button>
-      </Meta>
+     </>
   )
 }
 

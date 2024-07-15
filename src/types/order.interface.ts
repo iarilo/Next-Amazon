@@ -1,5 +1,5 @@
 import { ICartItem } from "./cart.interface";
-import { IUser } from "./user.interface";
+import { IUser } from "./type-user.interface";
 
 export enum EnumOrderStatus{
     PENDING = 'PEMDING',
