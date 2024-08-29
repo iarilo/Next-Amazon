@@ -1,5 +1,5 @@
 'use client'
-import React, { FormEvent, FormHTMLAttributes, useState,FC, PropsWithChildren } from 'react'
+import React, { FormHTMLAttributes, useState,FC, PropsWithChildren } from 'react'
 import styles from './page.module.css'
 import { AuthService } from 'services/auth/auth.service'
 import { IEmailPassword } from 'store/user/store-user.interface'
@@ -10,7 +10,8 @@ import Heading from '@/ui/Heading'
 import Field from '@/ui/input/Field'
 import { validEmail,passwordRegex,nameRegex,urlRegex,phone } from '@/screens/auth/valid-email'
 import { IUserData } from 'types/type-user.interface'
-//import { useAuthRegister } from '@/screens/auth/useAuthRedirect'
+import { useAuthRedirect } from '@/screens/auth/useAuthRedirect'
+
 
 
 interface IForm extends FormHTMLAttributes<HTMLFormElement>{
@@ -21,11 +22,16 @@ props: 'orange' | 'white'
 
 
 const FormloginAuth:FC<PropsWithChildren<IForm>>  = ({className,props}) => {
-    //useAuthRegister()
+		//useAuthRedirect()
 	const { isLoading } = useAuth()
 	const { login, register } = useActionsRedux()
 	const [type, setType] = useState<'login' | 'register'>('register')
+	
+	const [dataRedirect, setData] = useState<IUserData>()
+	if(dataRedirect) useAuthRedirect()
+	
 	console.log("Type-Login: ",type)
+	
 	const {
 		register: formRegister,
 		handleSubmit,
@@ -36,11 +42,13 @@ const FormloginAuth:FC<PropsWithChildren<IForm>>  = ({className,props}) => {
 	const onSubmit: SubmitHandler<IUserData> = (data,e) => {
 	   e?.preventDefault()
 		if (type === 'login')  {
-			login(data)} 
-		else {
+			login(data)
+		} 
+		 else {
 			register(data)
 		}
-		reset()
+	 reset()
+		
 	}
 
 	enum FlexDirection {
@@ -63,6 +71,7 @@ const FormloginAuth:FC<PropsWithChildren<IForm>>  = ({className,props}) => {
 			border: props === 'orange' ? '1px solid orange' : ' 1px solid white',
 		  };
 */
+
 	return (
 		<div className={styles.container}>
 			<form 

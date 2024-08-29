@@ -24,7 +24,7 @@ export interface IUserState {
 export interface ITokens {
     accesToken: string
     refreshToken: string
-    user:string
+    userI: IUser
 };
 //  Начальное состояние при загрузки
 export interface IInitialState {

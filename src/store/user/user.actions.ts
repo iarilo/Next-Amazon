@@ -37,12 +37,10 @@ export const register = createAppAsyncThunk < IAuthResponse, IUserData>(
 export const login = createAsyncThunk<IAuthResponse, IUserData>(
 	'/auth/login',// Название
 	async (data, thunkApi) => {
-		
 		try {
 		// data: Отправляю данные на  email и password на сервер
 	   //response: Получаю acssesToken и refrashToken и user с сервера
 			const response = await AuthService.main('login', data)
-			
     	return response
 		} catch (error) {
 			return thunkApi.rejectWithValue(error)
@@ -62,6 +60,7 @@ export const checkAuth = createAsyncThunk<IAuthResponse>(
 		try {
 			const response = await AuthService.getNewTokens()
 			return response.data
+			
 		} catch (error) {
 			if (errorCatch(error) === 'jwt expired') {
 				thunkApi.dispatch(logout())

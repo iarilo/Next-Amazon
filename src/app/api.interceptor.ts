@@ -1,9 +1,7 @@
 import axios from 'axios'
 import { errorCatch, getContentType } from './api.helper'
 import { getAccessToken, removeFromStorage } from 'services/auth/auth.helper'
-import { AuthService } from 'services/auth/auth.service'
-
-
+import { AuthService } from 'services/auth/auth.service';
 
 /*
 export const instance = ''
@@ -11,66 +9,57 @@ export const instance = ''
 // instance
 */
 
-export const instance = axios.create({
+export const axiosOptions = {
 	baseURL: process.env.SERVER_URL,
 	headers: getContentType(),
-})
+}
 
+export const axiosClassic = axios.create(axiosOptions )
 
+export const instance = axios.create(axiosOptions )
 
-instance.interceptors.request.use(config => {
-	//console.log('interceptors-REQUEST ')
-		const accesToken = getAccessToken()
+instance.interceptors.request.use( async (config) => {
+	
+	const accesToken = await getAccessToken()
 	if (config && config.headers && accesToken) {
 		config.headers.Authorization = `Bearer ${accesToken}`
 	}
-	
+ //console.log('interceptors.request - accesToken = ',accesToken)
 	return config
 })
 
-
 instance.interceptors.response.use(
 	//config => config,
-   async (config) =>{
+	async config => {
+		//await AuthService.getNewTokens()
 	
-		//await AuthService.getNewTokens()	
 		return config
 	},
-	
+
 	async error => {
-		console.log('interceptors-RESPONSE')
+	
+			// Записываю оригинальный запрос
 		const originalRequest = error.config
 		if (
-			( error.response.status === 401 ||
-			errorCatch(error) === 'jwt expired' ||
-			errorCatch(error) === 'jwt expired') && 
-			error.config && 
+			(error?.response?.status === 401 ||
+				errorCatch(error) === 'jwt expired' ||
+				errorCatch(error) === 'jwt expired') &&
+			error.config &&
 			!error.config._isRetry
 		) {
-			originalRequest._isRetry = true 
+			originalRequest._isRetry = true
 
 			try {
-				console.log('interceptors-RESPONSE-AuthService')
-				await AuthService.getNewTokens()			
+				//console.log('interceptors-RESPONSE-AuthService')
+				await AuthService.getNewTokens()
 				return instance.request(originalRequest)
 			} catch (error) {
-			if (errorCatch(error) === 'jwt expired') 
-			    removeFromStorage()
-				
+				if (errorCatch(error) === 'jwt expired') removeFromStorage()
 			}
 		}
 		throw error
 	},
 )
-
-
-
-
-
-
-
-
-
 
 /*
 // interceptors request  Ищю токен и  прикрипляю его
@@ -89,10 +78,6 @@ instance.interceptors.request.use(async (config) => {
 
 	return config
 })
-
-
-
-
 
 //  interceptors response ищю ошибку и обновляю токен
 // сокрощёная стрелочная функция где config озврощает config

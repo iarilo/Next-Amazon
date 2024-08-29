@@ -3,6 +3,7 @@ import {  persistStore,persistReducer, FLUSH, PAUSE, PERSIST, PURGE,
           REGISTER, REHYDRATE} from 'redux-persist';
 import storage from 'redux-persist/lib/storage'; // Choose your storage engine
 import userSlice  from './user/user.slice';
+import {cartSlice} from './cart/cart.slice';
 
 
 
@@ -24,9 +25,9 @@ const rootReducer = combineReducers({
   // cart: createSlice.reducer,
   // carousel: carouselSlice.reducer
 
-  // cart: '',
+   
   // carousel: '',
-
+  cart: cartSlice.reducer,
   user:  userSlice 
 })
 

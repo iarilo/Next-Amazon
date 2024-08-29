@@ -30,3 +30,17 @@
         border-radius: 5px;
         cursor: pointer;
     }
+
+    /* -------------- Loading -------------- */
+    .container_ImageLoading {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 20px;
+        height: 15vw;
+        justify-content: center;
+        background-color: blue;
+      }
+      .text_ImageLoading {
+        color: #ffffff;
+      }

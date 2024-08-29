@@ -17,9 +17,6 @@ const initialState: IInitialState = {
 	user: getStoreLocal('userLoc'),
 	isLoading: false,
 }
-
-console.log('initialState-user=',initialState.user)
-
 const userSlice = createSlice({
 	name: 'userSlice',
 	initialState: initialState,

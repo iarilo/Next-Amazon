@@ -2,7 +2,7 @@ import axios from 'axios'
 import Cookies from 'js-cookie'
 import { getContentType } from 'app/api.helper'
 import { instance } from 'app/api.interceptor'
-import { ICategory } from 'types/category.interface'
+import { ICategory, ICategoryProduct } from 'types/category.interface'
 
 const CATEGORY = 'category'
 

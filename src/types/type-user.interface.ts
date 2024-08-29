@@ -1,3 +1,6 @@
+import { IProduct } from "./product.interface";
+import { IOrder } from "./order.interface"; 
+
 export  interface IUser {
     map(arg0: (ell: IUser) => void): string
     id: number
@@ -15,4 +18,13 @@ export interface IUserData {
     avatarPath?: string 
     phone?: string
     password?: string;
+}
+
+
+export interface IFullUser extends IUser {
+   favorites: IProduct[],
+   orders: IOrder[] 
+   Error: string,
+   review: number[]
+
 }

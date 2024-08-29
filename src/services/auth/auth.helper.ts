@@ -1,24 +1,29 @@
 import Cookies from 'js-cookie'
 import { IAuthResponse, ITokens } from 'store/user/store-user.interface'
 
-function arrayToken(data: ITokens) {
+export function arrayToken(data: ITokens) {
 	const Array: ITokens[] = Object.values(data)
-	return Array
+	const accesToken = Array.map((token: ITokens) => token.accesToken)
+	const refreshToken = Array.map((token: ITokens) => token.refreshToken)
+	const { userI } = data
+
+	return { accesToken, refreshToken, userI }
 }
+
+
+
 // Запись токена
 export const saveTokenStorage = async (data: ITokens) => {
 	const tokensArray = arrayToken(data)
-	const accesToken = tokensArray.map((token: ITokens) => token.accesToken)
-	const refreshToken = tokensArray.map((token: ITokens) => token.refreshToken)
+	const { accesToken, refreshToken } = tokensArray
 	Cookies.set('accesToken', accesToken.join(''))
 	Cookies.set('refreshToken', refreshToken.join(''))
-    
 }
 
 // Запись  в общий localStorage
 //  IAuthResponse:  user: IUser,  accessToken: string ,refreshToken: string
 export const saveToStorage = async (data: IAuthResponse) => {
-   //console.log('SaveToStorage-Data = ',data)
+	//console.log('SaveToStorage-Data = ',data)
 	saveTokenStorage(data)
 	localStorage.setItem('userLoc', JSON.stringify(data.userI))
 }
@@ -26,6 +31,7 @@ export const saveToStorage = async (data: IAuthResponse) => {
 // Получение токена
 export const getAccessToken = async () => {
 	const accesToken = Cookies.get('accesToken')
+	//console.log('getAccessToken - accesToken =',accesToken)
 	return accesToken || null
 }
 

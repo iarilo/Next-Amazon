@@ -1,15 +1,16 @@
 import { instance } from "app/api.interceptor";
-import { IUser,IUserData  } from "types/type-user.interface";
+import { IFullUser, IUser,IUserData  } from "types/type-user.interface";
 
-const USER = 'user'
+const USER = '/user'
 
 export const UserService = {
 
     async userProfile(){
-     return instance<IUser>({
+     const profile = await instance<IFullUser>({
         url: `${USER}/profile`,
         method: 'GET'
      }) 
+     return  profile
     },
 
     async updateProfile(data: IUserData ){

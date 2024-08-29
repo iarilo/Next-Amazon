@@ -37,3 +37,11 @@ export interface IGetAllProduct {
   page?: number | string,
   perPage?: number | string  
 }
+export type TypeProducts = {
+  //map(arg0: (ell: IProduct) => import("react").JSX.Element): import("react").ReactNode;
+  products: IProduct[]
+}
+export type TypePaginationProducts = {
+  length : number
+  products: IProduct[]
+}

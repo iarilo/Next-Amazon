@@ -29,8 +29,7 @@ const AuthProvider: FC<PropsWithChildren> = ({children}  ) => {
 
 
   useEffect(() => {
-    const accesToken = getAccessToken();
-   console.log(' AuthProvider-accessToken  =',accesToken )
+    const accesToken = getAccessToken()
     if (!accesToken) {
         throw new Error('accessToken отсутствует')
     } checkAuth()
@@ -39,7 +38,7 @@ const AuthProvider: FC<PropsWithChildren> = ({children}  ) => {
 // Для лучшей безопасности лучше работать с серверными  cooki
 useEffect(()=>{
     const refreshToken = Cookies.get('refreshToken')
-   console.log(' AuthProvider-refreshToken  =',refreshToken  )
+  
     if(!refreshToken && user) logout()
 },[pathname]);
 
@@ -49,7 +48,7 @@ const router = useRouter()
  Метод some(), проверяет проходит ли хотя бы один элемент в массиве тест, реализованный предоставленной функцией.Он возвращает true или false. Он не изменяет массив.
  */ 
 /*
- Метод startsWith()значений Stringопределяет, начинается ли данная строка с символов указанной строки, возвращая trueили falseв зависимости от ситуации. 
+ Метод startsWith()значений String определяет, начинается ли данная строка с символов указанной строки, возвращая trueили falseв зависимости от ситуации. 
 */
 /*
  royte получает  url из  protectedRouts [ '/my-order', '/favorites','/blog' ]
