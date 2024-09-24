@@ -1,3 +1,4 @@
+"use client"
 import React, { FC, useState } from 'react'
 import { Rating } from 'react-simple-star-rating'
 import { IProduct } from 'types/product.interface'

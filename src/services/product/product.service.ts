@@ -1,4 +1,5 @@
-import { axiosClassic, instance } from "app/api.interceptor";
+
+import {  axiosClassic, instance,instanceDinamCookie } from "app/api.interceptor";
 import { IProduct, IProductData,IGetAllProduct, TypeProducts, TypePaginationProducts } from "types/product.interface";
 
 const PRODUCT = 'product'
@@ -22,11 +23,15 @@ async createProduct(){
    },
 
 async getAllProduct(queryData = {} as IGetAllProduct){
-    return axiosClassic<TypePaginationProducts>({
-        url: `${PRODUCT}/all`,
-        method: 'GET',
-        params: queryData
- }); 
+
+   //console.log('getAllProduct-queryData= ',queryData)
+   const {data} = await axiosClassic<TypePaginationProducts>({
+      url: `${PRODUCT}/all`,
+      method: 'GET',
+      params: queryData
+   }); 
+  // console.log('getAllProduct-data= ',data)
+ return data
 },
 
 async getByidProduct(id: string | number) {
@@ -51,7 +56,8 @@ return axiosClassic<IProduct>({
  }); 
 },
 async getByCategory(categoriSlug: string) {
-   return axiosClassic<IProduct[]>({
+   
+   return instanceDinamCookie<IProduct[]>({
     url: `${PRODUCT}/by-category/${categoriSlug}`,
     method: 'GET'
  }); 

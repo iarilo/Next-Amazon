@@ -1,3 +1,4 @@
+"use client"
 import { bindActionCreators } from '@reduxjs/toolkit'
 import { useEffect, useMemo } from 'react'
 import { useSelector, useDispatch, TypedUseSelectorHook } from 'react-redux'
@@ -33,6 +34,7 @@ export async function GetUserProfile() {
 	const response = await UserService.userProfile()
 	return response
 }
+
 export const useProfile = () => {
 	const { data: profileData, error } = useQuery({
 		queryKey: ['get profile'],
@@ -52,6 +54,12 @@ export const useProfile = () => {
 }
 
 // Card
-export const useCart = () => useTupedSelector(state => state.cart)
+export const useCart = () => {
+	const items =	useTupedSelector(state => state.cart.items)
+	const total = items.reduce(
+		(acc,item) => acc + item.prise * item.quantity, 0 
+	)
+	return {items, total}
+}
 
 //3:45

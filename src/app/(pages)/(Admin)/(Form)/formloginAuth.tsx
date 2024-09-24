@@ -1,14 +1,12 @@
 'use client'
 import React, { FormHTMLAttributes, useState,FC, PropsWithChildren } from 'react'
 import styles from './page.module.css'
-import { AuthService } from 'services/auth/auth.service'
-import { IEmailPassword } from 'store/user/store-user.interface'
 import { useActionsRedux, useAuth } from 'store/hooks-reduxer/hooks-redux'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import Button from '@/ui/Button'
 import Heading from '@/ui/Heading'
 import Field from '@/ui/input/Field'
-import { validEmail,passwordRegex,nameRegex,urlRegex,phone } from '@/screens/auth/valid-email'
+import { validEmail,passwordRegex } from '@/screens/auth/valid-email'
 import { IUserData } from 'types/type-user.interface'
 import { useAuthRedirect } from '@/screens/auth/useAuthRedirect'
 
@@ -22,7 +20,7 @@ props: 'orange' | 'white'
 
 
 const FormloginAuth:FC<PropsWithChildren<IForm>>  = ({className,props}) => {
-		//useAuthRedirect()
+		
 	const { isLoading } = useAuth()
 	const { login, register } = useActionsRedux()
 	const [type, setType] = useState<'login' | 'register'>('register')

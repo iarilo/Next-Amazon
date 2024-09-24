@@ -1,14 +1,22 @@
 .Section_Catalog{
     display: flex;
-    flex-wrap: wrap;
+    background-color: #ffffff;
+    
+   
+}
+.Section_Catalog_component{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
     gap: 20px;
-    justify-content: center;
 }
 
 .Section_Catalog_container{
     display: flex;
-    flex-direction: column;
-    align-items: center;
+    flex-wrap: wrap;
+
+       
 
 }
 .Section_Catalog_content{
@@ -16,8 +24,39 @@
     flex-wrap: wrap;
     gap: 20px;
 }
-.Section_Catalog_h3{
 
+.Section_Catalog_SortDropdown{
+display: flex;
+justify-content: flex-end;
+width: 100%;
+}
+
+/* -----------  Catalog params  ---------------*/
+
+
+
+.Section_Catalog_container_params{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 30px 0;
+    background-color: #ffffff;
+    width:100vw;
+}
+.Section_Catalog_content_params{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    padding: 0 20px;
+}
+
+
+ /* ------------------------------------*/
+
+.Section_pagination_button{
+display: flex;
+justify-content: center;
+gap: 5px;
 }
 
 .container_ProductItem {

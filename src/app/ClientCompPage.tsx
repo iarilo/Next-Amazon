@@ -1,15 +1,41 @@
 'use client'
 import React, { FC } from 'react'
-import Catalog from '@/ui/catalog/Catalog'
-import { TypePaginationProducts} from 'types/product.interface'
+import CatalogPagination from '@/ui/catalog/CatalogPagination'
+import { TypePaginationProducts } from 'types/product.interface'
+import ShopHedar from '@/ui/hedar/ShopHedar'
+import styles from './page.module.css'
+import Layout from '@/ui/layout/Layout'
 
-const ClientCompPage: FC<TypePaginationProducts> = products => {
+
+
+
+const ClientCompPage: FC<TypePaginationProducts> = ({ products, length }) => {
 	return (
-		<div>
-			<h3 style={{ textAlign:'center',color:"blue" }}>Магазин</h3>
-			<Catalog catalogProducts={products} />
+		<div className={styles.container_ClientCompPage}>
+			<ShopHedar />
+			<div className={styles.container_ClientCompPage_component}>
+				<CatalogPagination data={{ products, length }} />
+			</div>
 		</div>
 	)
 }
 
 export default ClientCompPage
+
+/*
+
+// -------------------- вариант с <Layout> -------------------
+const ClientCompPage: FC<TypePaginationProducts> = ({ products, length }) => {
+	return (
+		<Layout>
+			<div className={styles.container_ClientCompPage}>
+				<div className={styles.container_ClientCompPage_component}>
+					<CatalogPagination data={{ products, length }} />
+				</div>
+			</div>
+		</Layout>
+	)
+}
+
+export default ClientCompPage
+*/

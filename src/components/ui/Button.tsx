@@ -4,11 +4,13 @@ import styles from './page.module.css'
 
 interface IButton extends ButtonHTMLAttributes<HTMLButtonElement> {
 	variant: 'orange' | 'white' ;
+	size?:'smol' | 'medium' | 'large'
 }
 
 const Button: FC<PropsWithChildren<IButton>> = ({
 	children,
 	variant,
+	size = 'medium',
 	className,
 	...rest
 }) => {
@@ -17,6 +19,7 @@ const Button: FC<PropsWithChildren<IButton>> = ({
 		<button
 			{...rest}
 			className={className}
+			
 			style={{
 				border: '1px solid orange',
 				borderRadius: '10px',
@@ -27,6 +30,7 @@ const Button: FC<PropsWithChildren<IButton>> = ({
 				padding: '5px', // px-10 py-2 в Tailwind CSS
 				color: variant === 'orange' ? 'white' : 'orange', // text-white или text-primary в Tailwind CSS
 				backgroundColor: variant === 'orange' ? 'orange' : 'white', // bg-primary или bg-white в Tailwind CSS
+			//    'px-5 py-1 text-sm': size === 'smol'
 			}}
 		>
 			{children}

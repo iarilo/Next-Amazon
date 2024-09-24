@@ -1,7 +1,9 @@
 import axios from 'axios'
 import { errorCatch, getContentType } from './api.helper'
 import { getAccessToken, removeFromStorage } from 'services/auth/auth.helper'
-import { AuthService } from 'services/auth/auth.service';
+import { AuthService } from 'services/auth/auth.service'
+import { dinamRoutCookies } from 'services/cookies/utils/dinamRoutCookies'
+
 
 /*
 export const instance = ''
@@ -13,32 +15,30 @@ export const axiosOptions = {
 	baseURL: process.env.SERVER_URL,
 	headers: getContentType(),
 }
+export const axiosClassic = axios.create(axiosOptions)
+export const instance = axios.create(axiosOptions)
+export const instanceDinamCookie = axios.create(axiosOptions)
 
-export const axiosClassic = axios.create(axiosOptions )
+//  --------------  instanceDinamCookie  ----------------
+instanceDinamCookie.interceptors.request.use(async config => {
+	const accesToken = await dinamRoutCookies()
+	//console.log('AccesToken - instanceDinamCookie  =', accesToken)
 
-export const instance = axios.create(axiosOptions )
-
-instance.interceptors.request.use( async (config) => {
-	
-	const accesToken = await getAccessToken()
 	if (config && config.headers && accesToken) {
 		config.headers.Authorization = `Bearer ${accesToken}`
-	}
- //console.log('interceptors.request - accesToken = ',accesToken)
+		}
 	return config
 })
 
-instance.interceptors.response.use(
+instanceDinamCookie.interceptors.response.use(
 	//config => config,
 	async config => {
 		//await AuthService.getNewTokens()
-	
 		return config
 	},
 
 	async error => {
-	
-			// Записываю оригинальный запрос
+		// Записываю оригинальный запрос
 		const originalRequest = error.config
 		if (
 			(error?.response?.status === 401 ||
@@ -60,6 +60,71 @@ instance.interceptors.response.use(
 		throw error
 	},
 )
+
+// ----------------  instance   --------------------
+
+instance.interceptors.request.use(async config => {
+	const accesToken = await getAccessToken()
+	//console.log('AccesToken - api.interseptor  =', accesToken)
+
+	if (config && config.headers && accesToken) {
+		config.headers.Authorization = `Bearer ${accesToken}`
+		}
+	return config
+})
+
+instance.interceptors.response.use(
+	//config => config,
+	async config => {
+		//await AuthService.getNewTokens()
+		return config
+	},
+
+	async error => {
+		// Записываю оригинальный запрос
+		const originalRequest = error.config
+		if (
+			(error?.response?.status === 401 ||
+				errorCatch(error) === 'jwt expired' ||
+				errorCatch(error) === 'jwt expired') &&
+			error.config &&
+			!error.config._isRetry
+		) {
+			originalRequest._isRetry = true
+
+			try {
+				//console.log('interceptors-RESPONSE-AuthService')
+				await AuthService.getNewTokens()
+				return instance.request(originalRequest)
+			} catch (error) {
+				if (errorCatch(error) === 'jwt expired') removeFromStorage()
+			}
+		}
+		throw error
+	},
+)
+
+/*
+
+//  ---------------  передаю token в headers --------------
+// Create a function to configure the axios instance with the token 
+
+ export const authDinamic = async (token?: string) => {
+	const axiosOptionsDinamic = {
+	  baseURL: process.env.SERVER_URL,
+	  headers: {
+		'Content-Type': 'application/json',
+		Authorization: token ? `Bearer ${token}` : undefined,
+	  },
+	};
+  	const instanceDinamic = axios.create(axiosOptionsDinamic);
+  	return instanceDinamic;
+  };
+*/
+
+
+
+//  --------------------------------
 
 /*
 // interceptors request  Ищю токен и  прикрипляю его

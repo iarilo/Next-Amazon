@@ -1,6 +1,6 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+// @tailwind base;
+// @tailwind components;
+// @tailwind utilities;
 
 
   @import url('https://fonts.googleapis.com/css2?family=Golos+Text:wght@400;500;600;700;800;900&display=swap');
@@ -21,7 +21,7 @@
 }
 
 body {
-  @apply bg-bg-color text-base text-black;
+  // @apply bg-bg-color text-base text-black;
   font-family: 'Golos Text', sans-serif;
 }
 
@@ -31,5 +31,11 @@ body {
    text-decoration: none;
    opacity: 0.2 ;
 }
+h1,h2,h3,h4,h5,h6,p,span{
+  margin: 0;
+}
+
+
+
 
 

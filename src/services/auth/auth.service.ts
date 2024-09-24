@@ -6,7 +6,9 @@ import { removeFromreRreshToken, saveToStorage } from './auth.helper'
 import { IEmailPassword } from 'store/user/store-user.interface'
 import { axiosClassic, instance } from 'app/api.interceptor'
 import { IUserData, IUser } from 'types/type-user.interface'
-import { useRouter } from 'next/navigation'
+import { createServerCookie } from 'services/cookies/cookie.helper'
+
+
 
 /*
 export const AuthService = {
@@ -35,7 +37,9 @@ export const AuthService = {
 
 		const token = Object.values(response.data)
 		const acces = token.map(ell => ell.accesToken)
-		if (acces) saveToStorage(response.data)
+		if (acces) 
+			saveToStorage(response.data)
+		    createServerCookie(response.data)
 		return response.data
 	},
 

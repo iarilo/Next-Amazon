@@ -1,0 +1,86 @@
+/* ------------------  CartItem  -----------------  */
+.container_CartItem{
+
+}
+.container_CartItem_content{
+    display: flex;
+    border: 1px solid blue;
+    border-radius: 5px;
+    padding:5px;
+    width: min-content;
+}
+
+.container_CartItem_Image{
+
+}
+
+.container_CartItem_convertPrice_CartActions{
+    display: flex;
+    flex-direction: column;
+}
+
+.container_CartItem_convertPrice_text{
+
+}
+
+
+
+
+
+/* ------------------  CartActions  -----------------  */
+.container_CartActions{
+display: flex;
+    flex-grow: 2;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: flex-end;
+}
+.container_CartActions_button{
+    display: flex;
+    gap: 10px;
+
+}
+.container_CartActions_button_minus{
+    color: red;
+    background-color: initial;
+    font-size: 24px;
+    padding: 0;
+    border-radius: 5px;
+    padding: 0 5px;
+    height: fit-content;
+    line-height: 24px;
+    box-shadow: 1px 1px 0px 2px rgb(0, 0, 0, 0.1);
+    border: none;
+
+}
+.container_CartActions_button_plus{
+    color: blue;
+    background-color: initial;
+    font-size: 24px;
+    padding: 0;
+    border-radius: 5px;
+    padding: 0 3px;
+    height: fit-content;
+    line-height: 24px;
+    box-shadow: 1px 1px 0px 2px rgb(0, 0, 0, 0.1);
+    border: none;
+
+}
+.container_CartActions_button_delete{
+    border-radius: 5px;
+    background-color: initial;
+    border: none;
+    font-size: 20px;
+    padding: 0;
+    box-shadow: 1px 1px 0px 2px rgb(0, 0, 0, 0.1);
+
+}
+.container_CartActions_input{
+ width: 1ch ;
+ color: green;
+ background-color: initial;
+border:none;
+border-radius: 5px;
+box-shadow: 1px 1px 0px 2px rgb(0, 0, 0, 0.1);
+padding: 0 5px;
+}

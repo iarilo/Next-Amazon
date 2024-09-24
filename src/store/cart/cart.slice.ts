@@ -21,17 +21,18 @@ export const cartSlice = createSlice({
     addToCart: (state,action: PayloadAction<IAddToCartPayload>) => {
    // some() проверяет, удовлетворяет ли какой-либо элемент массива условию, заданному в передаваемой функции.   
    // Проверяю на текущий элемент
+
      const isExist = state.items.some(
         (item) => item.product.id === action.payload.product.id
-         
      ) 
-     if (!isExist) {
+
+   if (!isExist) {
       // Получаю объект { product: product,  quantity:1, prise: product.prise } из action.payload и заливаю его в initialStat items
-         state.items.push(
-            {...action.payload,id:state.items.length }
-        )
-        
-     }  
+         state.items.push( {...action.payload,id:state.items.length }  )
+        //console.log('addToCart-state.items =',state.items)
+     }
+     
+     
     },
   // Удаление из корзины
     removeFromCart:(state, action:PayloadAction<{id: number}>) => {

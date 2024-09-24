@@ -26,6 +26,14 @@ export interface ITokens {
     refreshToken: string
     userI: IUser
 };
+// Токен на сервере
+export interface ITokensServer {
+        accesToken: string[]
+        refreshToken: string[]
+        userI: IUser
+    
+
+    }
 //  Начальное состояние при загрузки
 export interface IInitialState {
    

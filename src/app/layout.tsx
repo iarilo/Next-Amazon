@@ -4,6 +4,7 @@ import { Inter } from 'next/font/google'
 import { ReduxProvider } from '../store/providers/provider-redux'
 import { PropsWithChildren } from 'react'
 import NavBar from './NavBar'
+import Saidbar from '@/ui/saidbar/Saidbar'
 
 //import './globals.css'
 

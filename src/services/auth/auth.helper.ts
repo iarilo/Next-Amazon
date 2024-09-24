@@ -1,7 +1,12 @@
-import Cookies from 'js-cookie'
-import { IAuthResponse, ITokens } from 'store/user/store-user.interface'
 
-export function arrayToken(data: ITokens) {
+import Cookies from 'js-cookie';
+import cookie from 'cookie'; // for server
+import { IAuthResponse, ITokens, ITokensServer } from 'store/user/store-user.interface'
+import { NextRequest } from 'next/server';
+
+
+
+export   async function  arrayToken(data: ITokens) {
 	const Array: ITokens[] = Object.values(data)
 	const accesToken = Array.map((token: ITokens) => token.accesToken)
 	const refreshToken = Array.map((token: ITokens) => token.refreshToken)
@@ -10,25 +15,27 @@ export function arrayToken(data: ITokens) {
 	return { accesToken, refreshToken, userI }
 }
 
-
-
-// Запись токена
+// Запись токена клиент
 export const saveTokenStorage = async (data: ITokens) => {
-	const tokensArray = arrayToken(data)
+	console.log('saveTokenStorage - accesToken =',data)
+
+	const tokensArray = await arrayToken(data)
 	const { accesToken, refreshToken } = tokensArray
 	Cookies.set('accesToken', accesToken.join(''))
 	Cookies.set('refreshToken', refreshToken.join(''))
 }
 
+
+
 // Запись  в общий localStorage
 //  IAuthResponse:  user: IUser,  accessToken: string ,refreshToken: string
 export const saveToStorage = async (data: IAuthResponse) => {
 	//console.log('SaveToStorage-Data = ',data)
-	saveTokenStorage(data)
-	localStorage.setItem('userLoc', JSON.stringify(data.userI))
+	   await saveTokenStorage(data)
+	  localStorage.setItem('userLoc', JSON.stringify(data.userI))
 }
 
-// Получение токена
+// Получение токена клиент
 export const getAccessToken = async () => {
 	const accesToken = Cookies.get('accesToken')
 	//console.log('getAccessToken - accesToken =',accesToken)
@@ -39,6 +46,45 @@ export const getAccessToken = async () => {
 export const getUserFromStorage = async () => {
 	return JSON.parse(localStorage.getItem('userLoc') || '{}')
 }
+
+// --------------- Сервер  --------------
+// Запись токена сервер
+/*
+export const setCookiesOnServer = (res: { setHeader: (arg0: string, arg1: string[]) => void; }, tokens: ITokensServer) => {
+    const { accesToken, refreshToken } = tokens;
+    res.setHeader('Set-Cookie', [
+        cookie.serialize('accesToken', accesToken.join(''), { 
+            httpOnly: true, 
+            secure: process.env.NODE_ENV === 'production', 
+            maxAge: 60 * 60 * 24 * 7, // 7 days
+            path: '/' 
+        }),
+        cookie.serialize('refreshToken', refreshToken.join(''), { 
+            httpOnly: true, 
+            secure: process.env.NODE_ENV === 'production', 
+            maxAge: 60 * 60 * 24 * 7, // 7 days
+            path: '/' 
+        })
+    ]);
+};
+
+// Получение токена сервер
+
+
+ export const getCookiesFromServer = (req: { headers: { cookie: any; }; }) => {
+//export const getCookiesFromServer = (req:NextRequest) => {
+    const cookies = cookie.parse(req.headers.cookie || '');
+    return {
+        accesToken: cookies.accesToken || null,
+        refreshToken: cookies.refreshToken || null
+    };
+};
+
+//console.log('getCookiesFromServer =',getCookiesFromServer() )
+
+//
+
+*/
 
 // Удаление токена
 export const removeFromStorage = () => {

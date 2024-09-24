@@ -1,46 +1,59 @@
-.home{
-    color: red;
-    text-align: center;
+.home {
+	color: red;
+	text-align: center;
+	margin: 0;
+}
+
+/* -------------- NavBar ----------------- */
+.container_navBar {
+	background-color: #f89f2e;
+	padding: 15px;
+	
+}
+
+.container_navBar_List_Link {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: flex-end;
+	align-items: flex-end;
+	gap: 7px;
+}
+
+.List_Link {
+	text-decoration: none;
+	color: blue;
+}
+.List_Link_Auth {
+	text-decoration: none;
+	color: #ffffff;
+	background-color: green;
+	padding: 5px;
+	border-radius: 5px;
+	cursor: pointer;
+}
+
+/* -------------- Loading -------------- */
+.container_ImageLoading {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 20px;
+	height: 15vw;
+	justify-content: center;
+	/* background-color: blue; */
+}
+.text_ImageLoading {
+	color: #ffffff;
+}
+.main {
+	padding: 20px;
+}
+
+/* -----------------  ClientCompPage  ----------------- */
+.container_ClientCompPage {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
 }
 
 
-/* -------------- NavBar ----------------- */
-.container_navBar{
-    background-color: #f0f0f0f7;
-    padding: 15px;
- }
-    
-    .container_navBar_List_Link{
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: flex-end;
-        align-items: flex-end;
-        gap: 7px;
-    }
-    
-    .List_Link{
-        text-decoration:none;
-        color:blue;
-    }
-    .List_Link_Auth{
-        text-decoration: none;
-        color: #ffffff;
-        background-color: green;
-        padding: 5px;
-        border-radius: 5px;
-        cursor: pointer;
-    }
-
-    /* -------------- Loading -------------- */
-    .container_ImageLoading {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        gap: 20px;
-        height: 15vw;
-        justify-content: center;
-        background-color: blue;
-      }
-      .text_ImageLoading {
-        color: #ffffff;
-      }

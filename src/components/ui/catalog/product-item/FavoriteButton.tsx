@@ -1,3 +1,4 @@
+"use client"
 import React,{FC} from 'react';
 import { useAuth, useProfile } from 'store/hooks-reduxer/hooks-redux';
 import { IProduct } from 'types/product.interface';
@@ -33,7 +34,8 @@ const FavoriteButton: FC<{productId: number}>  = ({productId}) => {
   const {favorites} = profile.data
    
   //console.log('FavoriteButton - Profile = ', profile.data)
-    //console.log('FavoriteButton - favorites = ', favorites)
+  // console.log('FavoriteButton - favorites = ', favorites)
+  // console.log('ProductId = ', productId)
   //  console.log('FavoriteButton - review = ',review )
 
   const isExist = favorites.some(

@@ -5,18 +5,24 @@ import FavoriteButton from './FavoriteButton'
 import AddToCardButton from './AddToCardButton '
 import ProductRating from './ProductRating'
 import styles from './page.module.css'
+import dynamic from 'next/dynamic'
+
+const DynamicFavoriteButton = dynamic(
+	()=> import('./FavoriteButton'),{ssr: false}
+ )
 
 const ProductItem: FC<{ product: IProduct }> = ({ product }) => {
 	const { id, name, images, category } = product
 	//console.log('ProductItem - products =', product)
+	//console.log('ProductId = ', id)
 
 	return (
 		<div>
 			<div className={styles.container_ProductItem}>
 				<div className={styles.content_ProductItem}>
 					<div className={styles.content_ProductItem_Cart}>
-						<FavoriteButton productId={product.id} />
-						<AddToCardButton product={product} />
+						<DynamicFavoriteButton productId={product.id} />
+						<AddToCardButton product={product} productId={id} />
 					</div>
 					<Image
 						width={150}

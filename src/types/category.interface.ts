@@ -1,7 +1,8 @@
 import { IProduct } from "./product.interface"
 
 export interface ICategory {
-    id: number
+	data: any
+    id: string
     name: string
     slug: string
     products:IProduct

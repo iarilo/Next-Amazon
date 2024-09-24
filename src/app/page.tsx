@@ -1,38 +1,17 @@
-import Image from 'next/image'
+
 import style from './page.module.css'
-import { AuthService } from 'services/auth/auth.service'
-import { FC, useState } from 'react'
-import { IUser } from 'types/type-user.interface'
 import ClientCompPage from './ClientCompPage'
-import { GetStaticProps, NextPage } from 'next'
-import {
-	IProduct,
-	TypePaginationProducts,
-	TypeProducts,
-} from 'types/product.interface'
 import { ProductService } from 'services/product/product.service'
-import { CategoryService } from 'services/category/category.service'
-
-// export async function generateStaticParams <TypeProducts> (){
-// 	const {data: products} = await ProductService.getAllProduct({
-// 		page: 1,
-// 		perPage: 4
-// 	})
-
-// 	console.log('generateStaticParams - products =', products)
-// 	return {
-// 		props:{
-// 			products
-// 		}
-// 	  }
-// }
+import { getCookiesToken } from 'services/cookies/cookie.helper'
+//import cookieTest from 'services/cookies/cookie.server'
 
 export const revalidate = 60
+
 
 async function getProducts<TypePaginationProducts>() {
 	const data = await ProductService.getAllProduct({
 		page: 1, // страница
-		perPage: 16, // количество картинок на странице
+		perPage: 4, // количество картинок на странице
 	})
 	return data
 }
@@ -43,15 +22,20 @@ export default async function Home() {
 	// 	const profile = await AuthService.getProfileUser()
 	// 	setUser(profile)
 	// }
+   	// }
+
+	// const token = await getCookiesToken()
+	// console.log('Home - token =', token)
 
 	const dataProduct = await getProducts()
-	const { data } = dataProduct
+	const { products, length } = dataProduct
 
 	return (
-		<main>
+		<main className={style.main}>
+
 			<h3 className={style.home}>Домашняя страница </h3>
 			<div>
-				<ClientCompPage products={data.products} length={data.length} />
+				<ClientCompPage products={products} length={length} />
 			</div>
 
 			<br />

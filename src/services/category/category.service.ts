@@ -1,13 +1,20 @@
-import axios from 'axios'
-import Cookies from 'js-cookie'
-import { getContentType } from 'app/api.helper'
-import { instance } from 'app/api.interceptor'
-import { ICategory, ICategoryProduct } from 'types/category.interface'
+import { instance,instanceDinamCookie } from 'app/api.interceptor'
+import { ICategory} from 'types/category.interface'
+//import { authDinamic } from 'app/api.interceptor'
+import { AxiosInstance } from 'axios'
 
-const CATEGORY = 'category'
+interface Slug{
+	slug?: string | undefined	
+}
+interface Params{
+	params:Slug	
+}
 
+
+const CATEGORY = '/category'
 export const CategoryService = {
 	async getAll() {
+	
 		return instance<ICategory[]>({
 			url: CATEGORY,
 			method: 'GET',
@@ -15,18 +22,44 @@ export const CategoryService = {
 	},
 
 	async getById(id: string | number) {
-		return instance<ICategory>({
-			url: `${CATEGORY}/${id}`,
+		return instance<ICategory[]>({
+			url: `category/by-slug/`,
 			method: 'GET',
 		})
 	},
 
-	async getBySlug(slug: string) {
+	/*
+	// -------------  вариант с Layout --------------
+	async getBySlug (params: Slug) {
+		const {slug} = params
 		return instance<ICategory>({
 			url: `${CATEGORY}/by-slug/${slug}`,
-			method: 'CET',
+			method: 'GET',
 		})
 	},
+	*/
+	
+ 
+	async getBySlug (params: Slug) {
+		const {slug} = params
+		return instanceDinamCookie <ICategory>({
+			url: `${CATEGORY}/by-slug/${slug}`,
+			method: 'GET',
+		})
+	},
+	
+
+// async getBySlug (params: Slug, axiosInstance: AxiosInstance):Promise<ICategory>  {
+//  const {slug} = params
+//   try {
+//     const response = await axiosInstance.get<ICategory>(`${CATEGORY}/by-slug/${slug}`);
+//     return response.data;
+//   } catch (error) {
+//     console.error('Error fetching products:', error);
+//     throw error;
+//   }
+// },
+
 
 	async create() {
 		return instance<ICategory>({
