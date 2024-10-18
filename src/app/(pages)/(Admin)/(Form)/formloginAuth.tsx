@@ -9,6 +9,7 @@ import Field from '@/ui/input/Field'
 import { validEmail,passwordRegex } from '@/screens/auth/valid-email'
 import { IUserData } from 'types/type-user.interface'
 import { useAuthRedirect } from '@/screens/auth/useAuthRedirect'
+import { useRouter } from 'next/navigation'
 
 
 
@@ -20,7 +21,7 @@ props: 'orange' | 'white'
 
 
 const FormloginAuth:FC<PropsWithChildren<IForm>>  = ({className,props}) => {
-		
+	const router = useRouter()	
 	const { isLoading } = useAuth()
 	const { login, register } = useActionsRedux()
 	const [type, setType] = useState<'login' | 'register'>('register')
@@ -45,7 +46,8 @@ const FormloginAuth:FC<PropsWithChildren<IForm>>  = ({className,props}) => {
 		 else {
 			register(data)
 		}
-	 reset()
+		reset()
+		router.push('/')
 		
 	}
 

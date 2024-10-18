@@ -1,5 +1,5 @@
 
-import {  axiosClassic, instance,instanceDinamCookie } from "app/api.interceptor";
+import {  axiosClassic, instance} from "app/api.interceptor";
 import { IProduct, IProductData,IGetAllProduct, TypeProducts, TypePaginationProducts } from "types/product.interface";
 
 const PRODUCT = 'product'
@@ -23,14 +23,15 @@ async createProduct(){
    },
 
 async getAllProduct(queryData = {} as IGetAllProduct){
-
-   //console.log('getAllProduct-queryData= ',queryData)
+   // queryData: данные которые получаю из CatalogPagination 
+  //console.log('getAllProduct-queryData= ',queryData)
+  // data:  данные только тех продуктов  которые находятся на странице, которые axios  получает с сервера из URL product/all
    const {data} = await axiosClassic<TypePaginationProducts>({
-      url: `${PRODUCT}/all`,
+      url: `${PRODUCT}/all/?searchTerm = ${queryData.searchTerm}`,
       method: 'GET',
       params: queryData
    }); 
-  // console.log('getAllProduct-data= ',data)
+   //console.log('getAllProduct-data= ',data)
  return data
 },
 
@@ -55,6 +56,18 @@ return axiosClassic<IProduct>({
     method:'GET'
  }); 
 },
+
+// ---------- laiout ------------
+
+async getByCategory(categoriSlug: string) {
+   
+   return instance<IProduct[]>({
+    url: `${PRODUCT}/by-category/${categoriSlug}`,
+    method: 'GET'
+ }); 
+},
+
+/* 
 async getByCategory(categoriSlug: string) {
    
    return instanceDinamCookie<IProduct[]>({
@@ -62,7 +75,7 @@ async getByCategory(categoriSlug: string) {
     method: 'GET'
  }); 
 },
-
+*/
 async getSimilarProduct(id: number | string) {
  return axiosClassic<IProduct[]>({
   url: `${PRODUCT}/similar/${id}`,

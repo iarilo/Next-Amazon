@@ -10,12 +10,15 @@ import Catalog from '@/ui/catalog/Catalog';
 
 
 const SearchPage:NextPage = () => {
+  // useSearchParams—  позволяет считывать строку запроса текущего URL-адреса .
   const searchParams = useSearchParams()
+  // Считываю из URL  query параметр params который передал в Serch.tcx из формы  
   const dataParams = searchParams.get('params')
   
-
+  //  data данные полученные с сервера, после фильтрации по  данным query параметр    
   const {data} = useQuery({
       queryKey:['search product', dataParams],
+      // передаю на сервер данные query параметр  
       queryFn: ()=> ProductService.getAllProduct({
         searchTerm: dataParams as string
       }),

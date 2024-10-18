@@ -31,7 +31,7 @@ const AddToCardButton: FC<{ product: IProduct; productId: number }> = ({
 					prise: product.prise,
 				});
 				
-			console.log('Click !!!')
+			//console.log('Click !!!')
 	};
 
 	return (

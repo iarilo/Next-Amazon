@@ -1,44 +1,45 @@
-"use server"
+'use server'
 import { CategoryService } from 'services/category/category.service'
 import { ProductService } from 'services/product/product.service'
 import Catalog from '@/ui/catalog/Catalog'
-import { dinamRoutCookies } from 'services/cookies/utils/dinamRoutCookies'
+//import { dinamRoutCookies } from 'services/cookies/utils/dinamRoutCookies'
+import Layout from '@/ui/layout/Layout'
 
 interface CategoryPageProps {
-  params: {
-    slug: string;
-  };
+	params: {
+		slug: string
+	}
 }
 
-export default async function CategoryPage({params:{ slug }}: CategoryPageProps ) {
-
-    dinamRoutCookies()
+export default async function CategoryPage({
+	params: { slug },
+}: CategoryPageProps) {
+	// dinamRoutCookies()
 
 	const category = await CategoryService.getBySlug({ slug })
-	const {name} = category.data 
+	const { name } = category.data
 	const products = await ProductService.getByCategory(slug)
-// Извлечь токен из файлов cookie
-//   const token = cookies().get('accesToken')?.value || '';
-//   const axiosInstance = await authDinamic(token);
+	// Извлечь токен из файлов cookie
+	//   const token = cookies().get('accesToken')?.value || '';
+	//   const axiosInstance = await authDinamic(token);
 
-//   // Извлечь данные о категориях и продуктах
-//   const [category, products] = await Promise.all([
-//     CategoryService.getBySlug({ slug }, axiosInstance),
-//     CategoryService.getBySlug({ slug }),
-//     ProductService.getByCategory(slug),
-//   ]);
-  return (
-    <div>
-      <h4 style={{ color: 'white', textAlign: 'center' }}>
-        CategoryPage/slug{' '}
-      </h4>
-      <Catalog catalogProducts={products.data || []} title={name} />
-    </div>
-  );
+	//   // Извлечь данные о категориях и продуктах
+	//   const [category, products] = await Promise.all([
+	//     CategoryService.getBySlug({ slug }, axiosInstance),
+	//     CategoryService.getBySlug({ slug }),
+	//     ProductService.getByCategory(slug),
+	//   ]);
+	return (
+		<Layout>
+			<div>
+				<h4 style={{ color: 'white', textAlign: 'center' }}>
+					CategoryPage/slug{' '}
+				</h4>
+				<Catalog catalogProducts={products.data || []} title={name} />
+			</div>
+		</Layout>
+	)
 }
-
-
-
 
 // =================== Вариант с "use client" ========================
 

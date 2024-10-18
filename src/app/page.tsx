@@ -2,7 +2,7 @@
 import style from './page.module.css'
 import ClientCompPage from './ClientCompPage'
 import { ProductService } from 'services/product/product.service'
-import { getCookiesToken } from 'services/cookies/cookie.helper'
+//import { getCookiesToken } from 'services/cookies/cookie.helper'
 //import cookieTest from 'services/cookies/cookie.server'
 
 export const revalidate = 60
@@ -28,14 +28,18 @@ export default async function Home() {
 	// console.log('Home - token =', token)
 
 	const dataProduct = await getProducts()
-	const { products, length } = dataProduct
+	const { products, length,categories } = dataProduct
 
 	return (
 		<main className={style.main}>
 
 			<h3 className={style.home}>Домашняя страница </h3>
 			<div>
-				<ClientCompPage products={products} length={length} />
+				<ClientCompPage 
+				products={products} 
+				length={length} 
+				categories={categories}
+				/>
 			</div>
 
 			<br />

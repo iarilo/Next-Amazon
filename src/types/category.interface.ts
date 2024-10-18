@@ -5,7 +5,7 @@ export interface ICategory {
     id: string
     name: string
     slug: string
-    products:IProduct
+    products:IProduct[]
 }
 export interface ICategoryProduct {
     length : number

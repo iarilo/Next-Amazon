@@ -1,4 +1,4 @@
-import { instance,instanceDinamCookie } from 'app/api.interceptor'
+import { instance} from 'app/api.interceptor'
 import { ICategory} from 'types/category.interface'
 //import { authDinamic } from 'app/api.interceptor'
 import { AxiosInstance } from 'axios'
@@ -28,7 +28,7 @@ export const CategoryService = {
 		})
 	},
 
-	/*
+
 	// -------------  вариант с Layout --------------
 	async getBySlug (params: Slug) {
 		const {slug} = params
@@ -37,9 +37,9 @@ export const CategoryService = {
 			method: 'GET',
 		})
 	},
-	*/
 	
- 
+	
+ /*
 	async getBySlug (params: Slug) {
 		const {slug} = params
 		return instanceDinamCookie <ICategory>({
@@ -47,7 +47,7 @@ export const CategoryService = {
 			method: 'GET',
 		})
 	},
-	
+	*/
 
 // async getBySlug (params: Slug, axiosInstance: AxiosInstance):Promise<ICategory>  {
 //  const {slug} = params

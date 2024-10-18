@@ -17,7 +17,9 @@ const Search = () => {
 	} = useForm<DataForm>()
 
   const submit: SubmitHandler<DataForm> = async data => {
+	// Получаю данные из input
 		const { params } = data
+	// Преобразую их в строку и передаю в качестве квэри параметра на страницу поиска	
 		const queryParams =  new URLSearchParams({ params:params }).toString()
 	   router.push(`/searchQueryPage?${queryParams}`)
 	 reset()

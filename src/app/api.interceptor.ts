@@ -17,55 +17,13 @@ export const axiosOptions = {
 }
 export const axiosClassic = axios.create(axiosOptions)
 export const instance = axios.create(axiosOptions)
-export const instanceDinamCookie = axios.create(axiosOptions)
-
-//  --------------  instanceDinamCookie  ----------------
-instanceDinamCookie.interceptors.request.use(async config => {
-	const accesToken = await dinamRoutCookies()
-	//console.log('AccesToken - instanceDinamCookie  =', accesToken)
-
-	if (config && config.headers && accesToken) {
-		config.headers.Authorization = `Bearer ${accesToken}`
-		}
-	return config
-})
-
-instanceDinamCookie.interceptors.response.use(
-	//config => config,
-	async config => {
-		//await AuthService.getNewTokens()
-		return config
-	},
-
-	async error => {
-		// Записываю оригинальный запрос
-		const originalRequest = error.config
-		if (
-			(error?.response?.status === 401 ||
-				errorCatch(error) === 'jwt expired' ||
-				errorCatch(error) === 'jwt expired') &&
-			error.config &&
-			!error.config._isRetry
-		) {
-			originalRequest._isRetry = true
-
-			try {
-				//console.log('interceptors-RESPONSE-AuthService')
-				await AuthService.getNewTokens()
-				return instance.request(originalRequest)
-			} catch (error) {
-				if (errorCatch(error) === 'jwt expired') removeFromStorage()
-			}
-		}
-		throw error
-	},
-)
 
 // ----------------  instance   --------------------
 
 instance.interceptors.request.use(async config => {
-	const accesToken = await getAccessToken()
-	//console.log('AccesToken - api.interseptor  =', accesToken)
+	//const accesToken = await getAccessToken()
+	const accesToken = await dinamRoutCookies()
+    //console.log('AccesToken - api.interseptor  =', accesToken)
 
 	if (config && config.headers && accesToken) {
 		config.headers.Authorization = `Bearer ${accesToken}`

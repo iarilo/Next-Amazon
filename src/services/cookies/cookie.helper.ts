@@ -26,10 +26,9 @@ export async function createServerCookie(data: ITokens) {
 	})
 }
 
+/*
 export async function getCookiesToken() {
-
 	try {
-
 		const token = cookies().get('accesToken')?.value;
 		//const token = await cookieGet()
 		console.log('getCookiesToken() =', token)
@@ -40,10 +39,11 @@ export async function getCookiesToken() {
 	}
 }
 
-
+*/
 
 // -------------------------------------
 
+/*
 export async function getServerSideProps(context: { query?: any; req?: any }) {
 	// Получаем cookies из заголовков запроса
 	const { req } = context
@@ -61,6 +61,8 @@ export async function getServerSideProps(context: { query?: any; req?: any }) {
 		},
 	}
 }
+
+*/
 
 /*
   export default function PostPage({ myCookie, postId }) {

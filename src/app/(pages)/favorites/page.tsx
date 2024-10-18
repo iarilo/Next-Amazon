@@ -9,7 +9,6 @@ import Catalog from "@/ui/catalog/Catalog";
 
 const FavoritesPage:NextPageAuth = () => {
   const {profile} = useProfile()
-  
   return (
     <div  style={{backgroundColor:'#ffffff', width:'100%'}}  >
       <h4 style={{color:'red'}} > favorites</h4>
@@ -18,4 +17,6 @@ const FavoritesPage:NextPageAuth = () => {
   )
 }
 FavoritesPage.isOnlyUser = true //только для авторизированного пользователя
+FavoritesPage.admin = true
+
 export default FavoritesPage 

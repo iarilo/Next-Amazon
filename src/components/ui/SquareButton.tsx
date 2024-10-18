@@ -12,7 +12,7 @@ const SquareButton:FC<ISquareButton> = ({Icon,onClick,number}) => {
 
   return (
     <div className={styles.container_SquareButton} >
-        <h6 style={{color:'#ffffff',margin:'0'}}  >SquareButton</h6>
+        {/* <h6 style={{color:'#ffffff',margin:'0'}}  >SquareButton</h6> */}
      <button 
      onClick={onClick}
      className={styles.container_SquareButton_button}
@@ -21,6 +21,16 @@ const SquareButton:FC<ISquareButton> = ({Icon,onClick,number}) => {
         <span>{number}</span>
       )}
       <Icon/>  
+
+      {/* 
+      
+    Если number имеет "истинное" значение (например, не равно 0, null, undefined, false, пустой строке или NaN), то !!number станет true.
+    Если number имеет "ложное" значение (например, 0 или null), то !!number станет false.   
+     Таким образом, !!number проверяет, есть ли у вас значение для number. 
+    Если оно существует и является истинным, будет отображаться <span>{number}</span>, 
+        в противном случае этот элемент не будет отрендерен.
+
+      */}
 
      </button>
 

@@ -8,10 +8,11 @@ import { GiTrashCan } from "react-icons/gi";
 
 // CartActions кнопки + , - , input , delete
 const CartActions: FC<{ item: ICartItem }> = ({ item }) => {
+	
 	const { removeFromCart, changeQiantity } = useActionsRedux()
 
 	const { items } = useCart()
-	const quantity = items.find(cartItem => cartItem.id === item.id)?.quantity
+	const quantityItems = items.find(cartItem => cartItem.id === item.id)?.quantity
 
     function handleChange(this: any, e:any) {
         this.size=Math.max(e.target.value.length, 1)
@@ -20,20 +21,25 @@ const CartActions: FC<{ item: ICartItem }> = ({ item }) => {
 		<div className={styles.container_CartActions} >
 			<h6 style={{color:'#000000',margin:'0'}}  > CartActions </h6>
 			<div className={styles.container_CartActions_button} >
+
+
+	{/* Атрибут disabledявляется логическим атрибутом.
+       Если он присутствует, то указывает, что кнопка должна быть отключена.
+       Отключенная кнопка не может использоваться и на нее нельзя нажать.
+       Атрибут disabledможет быть установлен так, чтобы пользователь не нажимал на кнопку, пока не будет выполнено какое-либо другое условие (например, установлен флажок и т. д.). Затем JavaScript может удалить отключенное значение и снова сделать кнопку нажимаемой. */}
 				<button
 					onClick={() => changeQiantity({ id: item.id, type: 'minus' })}
-					disabled={quantity === 1}
+					disabled={quantityItems === 1}
                     className={styles.container_CartActions_button_minus}
 					// > <FiMinus/> </button>
 				>
-					
-					-
+				   -
 				</button>
 
 				<input
                   type='text' 
-                  disabled readOnly value={quantity}
-                  size={quantity} 
+                  disabled readOnly value={quantityItems}
+                  size={quantityItems} 
                 //   onInput={handleChange}
                   className={styles.container_CartActions_input}
                   
@@ -44,8 +50,7 @@ const CartActions: FC<{ item: ICartItem }> = ({ item }) => {
                     className={styles.container_CartActions_button_plus}
 					//> <FiPlus/> </button>
 				>
-					
-					+ 
+				  + 
 				</button>
 
 				<button 

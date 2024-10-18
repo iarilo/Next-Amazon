@@ -6,14 +6,23 @@
 	display: flex;
 	flex-direction: column;
 	gap: 10px;
+	/* высота сайтбара, вычитаю хэдар  */
+	/* height: calc(100vh - 91px); */
 	padding: 20px;
 	background-color: #000000;
+}
+.container_Saidbar_content{
+	display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
 }
 
 .container_Saidbar h4,
 .container_Saidbar h3 {
 	font-size: 14px;
 }
+
 
 .Saidbar_Link {
 	color: #ffffff;
@@ -24,6 +33,27 @@
 .Saidbar_Link:hover {
 	color: #f89f2e;
 }
+
+
+.container_Saidbar_Icon{
+	display: flex;
+    color: rgb(255, 255, 255);
+    margin: 0px;
+    font-size: 14px;
+    align-items: flex-start;
+}
+
+.container_Saidbar_ul{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    gap: 5px;
+}
+
+
 /* -----------  ShopHedar ------------ */
 
 .container_ShopHedar {
@@ -42,6 +72,14 @@
 .container_ShopHedar_button {
 	display: flex;
 	gap: 10px;
+}
+
+
+
+.container_ShopHedar_favorites a {
+	font-size: 25px;
+    display: block;
+    text-align: center;
 }
 /* --------------  Search ------------- */
 
@@ -119,17 +157,32 @@
     gap: 10px;
 }
 
-.container_Cart_convertPrice {
-}
-
-.container_Cart_Button {
-}
 
 /* --------------- SquareButton --------------- */
 
 .container_SquareButton {
+	display: flex;
+    justify-content: center;
 }
 .container_SquareButton_button {
 	background-color: #f89f2e;
 	border: none;
+}
+.container_SquareButton_button svg {
+width: 1.1rem;
+height: 1.1rem;
+}
+
+
+/*------------------ HeaderProfile --------------------   */
+
+.container_HeaderProfile{
+display:flex;
+flex-direction: column;
+align-items: center;
+position: relative;
+}
+.container_HeaderProfile_Image{
+	border-radius: 50px;
+
 }

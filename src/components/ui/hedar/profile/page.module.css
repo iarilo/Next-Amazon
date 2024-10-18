@@ -1,0 +1,46 @@
+.container_ComponentProfile{
+    display: grid;
+    gap: 5px;
+    background-color: white;
+    border-radius: 5px;
+    position: absolute;
+    top: 5vw;
+    right: 10vw;
+    padding: 10px;
+}
+
+.container_ComponentProfile h6,
+.container_ComponentProfile h5,
+.container_ComponentProfile p,
+.container_ComponentProfile span{
+    color:#000000;
+    margin: 0;
+    padding: 0;
+
+    font-size: 12px;
+}
+
+.container_ComponentProfile_favorites{
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(70px, auto));
+    grid-gap: 10px;
+    min-width: 30vw;
+
+ 
+}
+.container_ComponentProfile_favorites ul{
+    margin: 0;
+    padding: 5px;
+    border: 1px solid blue;
+    border-radius: 5px;
+}
+.container_ComponentProfile_logout{
+    display: grid;
+    width: 85px;
+    grid-template-columns: repeat(auto-fit, minmax(40px, auto));
+}
+
+.container_ComponentProfile_logout_img:hover {
+    box-shadow: 5px 5px 5px 0px rgb(0, 0, 0, 0.2);
+    cursor:pointer;
+}

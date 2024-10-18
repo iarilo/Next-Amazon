@@ -22,6 +22,9 @@ const nextConfig = {
             {protocol:"https", hostname: 'www.shutterstock.com'},
             {protocol:"https", hostname: 'i.simpalsmedia.com'},
             {protocol:"https", hostname: "cojo.ru" },
+            {protocol:"https", hostname: "ru.pngtree.com" },
+            {protocol:"https", hostname: "img.freepik.com" },
+          
                     
 
         ],

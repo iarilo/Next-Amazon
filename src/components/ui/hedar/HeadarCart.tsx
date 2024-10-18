@@ -1,11 +1,10 @@
+"use client"
 import React from 'react';
 import { useOutside } from 'custom-hooks/useOutside';
 import { useCart } from 'store/hooks-reduxer/hooks-redux';
-import { useRouter } from 'next/navigation';
 import SquareButton from '../SquareButton';
 import { RiShoppingCartLine } from "react-icons/ri";
 import CartItem from 'store/cart/CartItem';
-import { convertPrice } from 'utils/convertPrice';
 import Button from '../Button';
 import styles from '../page.module.css';
 
@@ -14,10 +13,11 @@ const Cart = () => {
 const {isShow,setIsShow,ref} = useOutside(false)
 //  items  выбранный товар
 const {items,total} = useCart()
-const {push} = useRouter()
 
-// console.log('Cart-items = ',items)
+
+ //console.log('Cart-items = ',items)
 // console.log('Cart-total = ',total)
+ 
 
   return (
     <div className={styles.container_Cart} >
@@ -25,11 +25,12 @@ const {push} = useRouter()
       {/* SquareButton  число товаров и иконка на кнопки корзины */}
       <SquareButton
       Icon={RiShoppingCartLine}
-      onClick={()=> {setIsShow(!isShow)}}
+      //перключаю  isShow с false  на  true 
+      onClick={()=> { setIsShow(!isShow)}}
       number={items.length}
       />
 
-        <div className= {isShow?  styles.openMenu :  styles.closeMenu} >
+        <div ref={ref}  className= {isShow?  styles.openMenu :  styles.closeMenu} >
         {/* <div  > */}
   
         <span style={{fontSize:'14px', fontWeight:'bold'}} > My cart</span>
@@ -47,16 +48,17 @@ const {push} = useRouter()
           <span style={{fontSize:'14px', fontWeight:'bold'}} >
               Total:
                 <span>
-                   {convertPrice(total)}
+                   {/* {convertPrice(total)} */}
+                    {total} руб
                </span>
           </span>
           {/* <div>{convertPrice(total)}</div> */}
         </div>
 
         <div className={styles.container_Cart_Button} >
-          <Button
-           variant='white'
-          >Place order</Button>
+          <Button variant='white' >
+            Place order
+          </Button>
         </div>
 
 

@@ -6,6 +6,7 @@ import AddToCardButton from './AddToCardButton '
 import ProductRating from './ProductRating'
 import styles from './page.module.css'
 import dynamic from 'next/dynamic'
+import { ICategory } from 'types/category.interface'
 
 const DynamicFavoriteButton = dynamic(
 	()=> import('./FavoriteButton'),{ssr: false}
@@ -18,7 +19,10 @@ const ProductItem: FC<{ product: IProduct }> = ({ product }) => {
 
 	return (
 		<div>
-			<div className={styles.container_ProductItem}>
+			<div className={styles.container_ProductItem} >
+
+
+
 				<div className={styles.content_ProductItem}>
 					<div className={styles.content_ProductItem_Cart}>
 						<DynamicFavoriteButton productId={product.id} />
@@ -58,6 +62,8 @@ const ProductItem: FC<{ product: IProduct }> = ({ product }) => {
 						<span className={styles.content_ProductItem_RUB}> руб</span>
 					</div>
 				</div>
+
+
 			</div>
 		</div>
 	)

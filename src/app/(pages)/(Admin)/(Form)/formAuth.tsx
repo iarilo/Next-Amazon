@@ -1,15 +1,14 @@
 'use client'
-import React, { FormEvent, FormHTMLAttributes, useState,FC, PropsWithChildren } from 'react'
+import React, { FormHTMLAttributes, useState,FC, PropsWithChildren } from 'react'
 import styles from './page.module.css'
-import { AuthService } from 'services/auth/auth.service'
-import { IEmailPassword } from 'store/user/store-user.interface'
 import { useActionsRedux, useAuth } from 'store/hooks-reduxer/hooks-redux'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import Button from '@/ui/Button'
 import Heading from '@/ui/Heading'
 import Field from '@/ui/input/Field'
-import { validEmail,passwordRegex,nameRegex,urlRegex,phone } from '@/screens/auth/valid-email'
+import { validEmail,passwordRegex,nameRegex,phone } from '@/screens/auth/valid-email'
 import { IUserData } from 'types/type-user.interface'
+import { useRouter } from 'next/navigation'
 
 
 interface IForm extends FormHTMLAttributes<HTMLFormElement>{
@@ -21,6 +20,7 @@ props: 'orange' | 'white'
 
 
 const FormAuth:FC<PropsWithChildren<IForm>>  = ({className,props}) => {
+	const router = useRouter()
 	const { isLoading } = useAuth()
 	const { login, register } = useActionsRedux()
 	const [type, setType] = useState<'login' | 'register'>('register')
@@ -40,6 +40,7 @@ const FormAuth:FC<PropsWithChildren<IForm>>  = ({className,props}) => {
 			register(data)
 		}
 		reset()
+		router.push('/')
 	}
 
 	enum FlexDirection {
@@ -111,10 +112,10 @@ const FormAuth:FC<PropsWithChildren<IForm>>  = ({className,props}) => {
 					{...formRegister('avatarPath', {
 			  //required: Сообщение об ошибке
 						required: 'avatarPath не валидный',
-						pattern: {
-							value: urlRegex,
-							message: 'avatarPath не валидный',
-						},
+						// pattern: {
+						// 	value: urlRegex,
+						// 	message: 'avatarPath не валидный',
+						// },
 					})}
 					id='registr_avatarPath'
 					type='avatarPath'

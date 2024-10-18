@@ -28,7 +28,8 @@ const CartItem: FC<{ item: ICartItem }> = ({ item }) => {
 							{item.product.name}:{' '}
 						</span>
 						<span style={{ fontSize: '12px', fontWeight: 'bold' }}>
-							{convertPrice(item.product.prise)}
+							{/* {convertPrice(item.product.prise)} */}
+							{item.product.prise} руб
 						</span>
 					</div>
 				</div>
