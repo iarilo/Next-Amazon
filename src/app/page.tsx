@@ -8,7 +8,7 @@ import { ProductService } from 'services/product/product.service'
 export const revalidate = 60
 
 
-async function getProducts<TypePaginationProducts>() {
+async function getProducts() {
 	const data = await ProductService.getAllProduct({
 		page: 1, // страница
 		perPage: 4, // количество картинок на странице
@@ -26,7 +26,7 @@ export default async function Home() {
 
 	// const token = await getCookiesToken()
 	// console.log('Home - token =', token)
-
+	
 	const dataProduct = await getProducts()
 	const { products, length,categories } = dataProduct
 
@@ -35,12 +35,12 @@ export default async function Home() {
 
 			<h3 className={style.home}>Домашняя страница </h3>
 			<div>
-				<ClientCompPage 
+				 <ClientCompPage 
 				products={products} 
 				length={length} 
 				categories={categories}
-				/>
-			</div>
+				/> 
+			</div> 
 
 			<br />
 			<hr style={{ border: '2px solid green', width: '80%' }} />

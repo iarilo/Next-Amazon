@@ -2,6 +2,6 @@
 import { cookies } from "next/headers";
 
 export async function dinamRoutCookies() {
-	return cookies().get('accesToken')?.value || '';
-	
+   const tokens =	 cookies().get('accesToken')?.value || '';
+	return tokens
 }

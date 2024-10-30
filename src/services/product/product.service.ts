@@ -26,13 +26,14 @@ async getAllProduct(queryData = {} as IGetAllProduct){
    // queryData: данные которые получаю из CatalogPagination 
   //console.log('getAllProduct-queryData= ',queryData)
   // data:  данные только тех продуктов  которые находятся на странице, которые axios  получает с сервера из URL product/all
-   const {data} = await axiosClassic<TypePaginationProducts>({
-      url: `${PRODUCT}/all/?searchTerm = ${queryData.searchTerm}`,
-      method: 'GET',
-      params: queryData
-   }); 
-   //console.log('getAllProduct-data= ',data)
- return data
+
+  const {data} = await axiosClassic<TypePaginationProducts>({
+   url: `${PRODUCT}/all/?searchTerm = ${queryData.searchTerm}`,
+   method: 'GET',
+   params: queryData
+}); 
+//console.log('getAllProduct-data= ',data)
+return data
 },
 
 async getByidProduct(id: string | number) {

@@ -24,12 +24,13 @@ export const AuthService = {
 	async main(type: 'login' | 'register', data: IUserData) {
 		//instance = axios.create  baseURL:,  headers: 'Content-Type':'application/json'
 		// IAuthResponse (id: , name: , email: , avatarPath: , phone:  и  accessToken , refreshToken)
-
-		const response = await axiosClassic<IAuthResponse>({
+			const response = await axiosClassic<IAuthResponse>({
 			url: `/auth/${type}`,
 			method: 'POST',
 			data: data,
 		})
+
+
 		// saveToStorage Запись  в общий localStorage
 		//console.log('Action.server_Login-Data: ',data)
 		//console.log('Action.server_Login-response: ',response)
@@ -51,7 +52,7 @@ export const AuthService = {
 		// Отправляю данные data:IAuthResponse " Ответ аутентификации   IUser  "
 		const response = await axiosClassic.post<string, { data: IAuthResponse }>(
 			// Указываю полную строку на метод создания access-tocen , на бэкэнде
-			process.env.SERVER_URL + '/auth/login/access-tocen',
+			process.env.NEXT_PUBLIC_SERVER_URL  + '/auth/login/access-tocen',
 			// Передаю refreshToken в body
 			{ refreshToken },
 			// Type json для headers
@@ -67,7 +68,7 @@ export const AuthService = {
 		//  console.log('Data-user: ',dataUser)
 		try {
 			const response = await axios.post<string, { data: IAuthResponse }>(
-				process.env.SERVER_URL + '/auth/register',
+				process.env.NEXT_PUBLIC_SERVER_URL  + '/auth/register',
 				data,
 				{ headers: getContentType() },
 			)

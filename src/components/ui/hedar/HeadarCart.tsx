@@ -7,9 +7,12 @@ import { RiShoppingCartLine } from "react-icons/ri";
 import CartItem from 'store/cart/CartItem';
 import Button from '../Button';
 import styles from '../page.module.css';
+import { useRouter } from 'next/navigation';
+import { ICartItem } from 'types/cart.interface';
 
 // Иконка корзины  в hedar
 const Cart = () => {
+const router = useRouter()  
 const {isShow,setIsShow,ref} = useOutside(false)
 //  items  выбранный товар
 const {items,total} = useCart()
@@ -38,7 +41,7 @@ const {items,total} = useCart()
         <div  className={styles.container_Cart_CartItem} >
           {/* CartItems   картинки выбраного товара */}
           {items.length?(
-            items.map((item)=> <CartItem item={item} key={item.id}/> )
+            items.map((item: ICartItem)=> <CartItem item={item} key={item.id}/> )
           ) : (
             <span style={{fontSize:'14px', fontWeight:'bold'}} >Корзина пуста</span>
           )}
@@ -56,7 +59,11 @@ const {items,total} = useCart()
         </div>
 
         <div className={styles.container_Cart_Button} >
-          <Button variant='white' >
+          <Button 
+          variant='white'
+          onClick={()=> router.push('/order')}
+         
+          >
             Place order
           </Button>
         </div>

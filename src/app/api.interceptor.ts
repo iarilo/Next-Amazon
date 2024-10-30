@@ -12,7 +12,7 @@ export const instance = ''
 */
 
 export const axiosOptions = {
-	baseURL: process.env.SERVER_URL,
+	baseURL: process.env.NEXT_PUBLIC_SERVER_URL,
 	headers: getContentType(),
 }
 export const axiosClassic = axios.create(axiosOptions)
@@ -22,7 +22,7 @@ export const instance = axios.create(axiosOptions)
 
 instance.interceptors.request.use(async config => {
 	//const accesToken = await getAccessToken()
-	const accesToken = await dinamRoutCookies()
+       const accesToken = await dinamRoutCookies()
     //console.log('AccesToken - api.interseptor  =', accesToken)
 
 	if (config && config.headers && accesToken) {
