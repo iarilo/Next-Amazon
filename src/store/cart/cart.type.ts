@@ -6,6 +6,7 @@
  // Получаю всё все данные из корзины
  export interface ICartInitialState{
  items: ICartItem[]
+ cartUserId:null | number
  };
  // Увеличиваю или уменьшаю количество в корзине, получаю только id
  export interface IChengeQantytyPaiload extends

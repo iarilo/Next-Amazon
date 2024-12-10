@@ -18,7 +18,7 @@ const {isShow,setIsShow,ref} = useOutside(false)
 const {items,total} = useCart()
 
 
- //console.log('Cart-items = ',items)
+//console.log('Cart-items = ',items)
 // console.log('Cart-total = ',total)
  
 
@@ -41,7 +41,8 @@ const {items,total} = useCart()
         <div  className={styles.container_Cart_CartItem} >
           {/* CartItems   картинки выбраного товара */}
           {items.length?(
-            items.map((item: ICartItem)=> <CartItem item={item} key={item.id}/> )
+            items.map((item: ICartItem)=> <CartItem item={{...item}} key={item.id}/> )
+             //<CartItem item={items} key={items.id}/> 
           ) : (
             <span style={{fontSize:'14px', fontWeight:'bold'}} >Корзина пуста</span>
           )}

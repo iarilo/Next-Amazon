@@ -1,30 +1,33 @@
 import { createAsyncThunk } from '@reduxjs/toolkit'
 import { errorCatch } from 'app/api.helper'
-import { IAuthResponse, IEmailPassword } from './store-user.interface'
-import { removeFromStorage } from 'services/auth/auth.helper'
+import { IAuthResponse } from './store-user.interface'
+import {
+	getRoleFromStorage,
+	removeFromStorage,
+} from 'services/auth/auth.helper'
 import { AuthService } from 'services/auth/auth.service'
 import { AppDispath, RootState } from 'store/store'
 import { IUserData } from 'types/type-user.interface'
-
+import { ICreateRole } from 'types/role.interface'
+import {useRouter} from 'next/navigation'
 
 const createAppAsyncThunk = createAsyncThunk.withTypes<{
 	state: RootState
 	dispatch: AppDispath
 	rejectValue: string
 	extra: { s: string; n: number }
-	
-  }>()
+}>()
 
 // Функции  выполняют асинхронных запрос на сервер и обрабатываются в slice
 
 /* register */
 // <IAuthResponse, IEmailPassword> то что передаётся в   data
 //export const register = createAsyncThunk < IAuthResponse, IEmailPassword>(
-export const register = createAppAsyncThunk < IAuthResponse, IUserData>(
+export const register = createAppAsyncThunk<IAuthResponse, IUserData>(
 	'auth/register', // Название
 	async (data, thunkApi) => {
 		// data: Отправляю данные на  email и password на сервер
-	   //response: Получаю acssesToken и refrashToken и user с сервера
+		//response: Получаю acssesToken и refrashToken и user с сервера
 		try {
 			const response = await AuthService.main('register', data)
 			return response
@@ -35,13 +38,13 @@ export const register = createAppAsyncThunk < IAuthResponse, IUserData>(
 )
 // Делает запрос на сервер
 export const login = createAsyncThunk<IAuthResponse, IUserData>(
-	'/auth/login',// Название
+	'/auth/login', // Название
 	async (data, thunkApi) => {
 		try {
-		// data: Отправляю данные на  email и password на сервер
-	   //response: Получаю acssesToken и refrashToken и user с сервера
+			// data: Отправляю данные на  email и password на сервер
+			//response: Получаю acssesToken и refrashToken и user с сервера
 			const response = await AuthService.main('login', data)
-    	return response
+			return response
 		} catch (error) {
 			return thunkApi.rejectWithValue(error)
 		}
@@ -49,18 +52,23 @@ export const login = createAsyncThunk<IAuthResponse, IUserData>(
 )
 
 /* logout  удаляет все coocie  и данные из localStorage */
-export const logout = createAsyncThunk('auth/login', async () => {
+export const logout = createAsyncThunk('auth/login', async (_, { dispatch }) => {
 	removeFromStorage()
+	// localStorage.removeItem('cart')
+	localStorage.clear()
+	// dispatch({ type: 'auth/logoutSuccess' });
+	// // Редирект на главную страницу
+	// window.location.href = '/';
+
 })
 
 /* checkAuth  проверка авторизиции и получение новых токенов */
 export const checkAuth = createAsyncThunk<IAuthResponse>(
-	'auth/check-auth',  // Название
+	'auth/check-auth', // Название
 	async (_, thunkApi) => {
 		try {
 			const response = await AuthService.getNewTokens()
 			return response.data
-			
 		} catch (error) {
 			if (errorCatch(error) === 'jwt expired') {
 				thunkApi.dispatch(logout())

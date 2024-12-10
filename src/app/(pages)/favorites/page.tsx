@@ -16,7 +16,6 @@ const FavoritesPage:NextPageAuth = () => {
     </div>
   )
 }
-FavoritesPage.isOnlyUser = true //только для авторизированного пользователя
-FavoritesPage.admin = true
+
 
 export default FavoritesPage 

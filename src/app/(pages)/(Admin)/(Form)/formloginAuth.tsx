@@ -1,7 +1,7 @@
 'use client'
 import React, { FormHTMLAttributes, useState,FC, PropsWithChildren } from 'react'
 import styles from './page.module.css'
-import { useActionsRedux, useAuth } from 'store/hooks-reduxer/hooks-redux'
+import { useActionsRedux, useAuth, useProfile } from 'store/hooks-reduxer/hooks-redux'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import Button from '@/ui/Button'
 import Heading from '@/ui/Heading'
@@ -10,6 +10,7 @@ import { validEmail,passwordRegex } from '@/screens/auth/valid-email'
 import { IUserData } from 'types/type-user.interface'
 import { useAuthRedirect } from '@/screens/auth/useAuthRedirect'
 import { useRouter } from 'next/navigation'
+import { getStoreLocal } from 'utils/local-storage'
 
 
 
@@ -24,12 +25,18 @@ const FormloginAuth:FC<PropsWithChildren<IForm>>  = ({className,props}) => {
 	const router = useRouter()	
 	const { isLoading } = useAuth()
 	const { login, register } = useActionsRedux()
+   
+
+
 	const [type, setType] = useState<'login' | 'register'>('register')
-	
 	const [dataRedirect, setData] = useState<IUserData>()
 	if(dataRedirect) useAuthRedirect()
 	
 	console.log("Type-Login: ",type)
+
+	
+	
+	
 	
 	const {
 		register: formRegister,
@@ -42,11 +49,13 @@ const FormloginAuth:FC<PropsWithChildren<IForm>>  = ({className,props}) => {
 	   e?.preventDefault()
 		if (type === 'login')  {
 			login(data)
+	
 		} 
 		 else {
 			register(data)
 		}
 		reset()
+		
 		router.push('/')
 		
 	}

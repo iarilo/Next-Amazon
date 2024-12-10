@@ -1,12 +1,14 @@
 import React, { FC } from 'react'
 import CartActions from './CartActions'
-import { ICartItem } from 'types/cart.interface'
+import { ICartItem,Item } from 'types/cart.interface'
 import Image from 'next/image'
 import { convertPrice } from 'utils/convertPrice'
 import styles from './page.module.css'
 
 const CartItem: FC<{ item: ICartItem }> = ({ item }) => {
 	// item все выбраные продукты
+
+	//console.log('item-CartItem =',item)
 	return (
 		<div className={styles.container_CartItem}>
 			<h6 style={{ color: '#000000', margin: '0' }}>CartItem</h6>
@@ -28,12 +30,13 @@ const CartItem: FC<{ item: ICartItem }> = ({ item }) => {
 							{item.product.name}:{' '}
 						</span>
 						<span style={{ fontSize: '12px', fontWeight: 'bold' }}>
-							{/* {convertPrice(item.product.prise)} */}
+							 {convertPrice(item.product.prise)} 
 							{item.product.prise} руб
 						</span>
 					</div>
 				</div>
 			</div>
+
 		</div>
 	)
 }

@@ -27,7 +27,7 @@ async getAllProduct(queryData = {} as IGetAllProduct){
   //console.log('getAllProduct-queryData= ',queryData)
   // data:  данные только тех продуктов  которые находятся на странице, которые axios  получает с сервера из URL product/all
 
-  const {data} = await axiosClassic<TypePaginationProducts>({
+  const {data} = await instance<TypePaginationProducts>({
    url: `${PRODUCT}/all/?searchTerm = ${queryData.searchTerm}`,
    method: 'GET',
    params: queryData

@@ -6,6 +6,7 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import store, { persiStor } from 'store/store'
 import AuthProvider from './auth-provider/AuthProvider'
 import styles from './page.module.css'
+import CheckRolle from './auth-provider/CheckRolle'
 
 const queryClient = new QueryClient({
 	// Отключаю переобновление при фокусе окна

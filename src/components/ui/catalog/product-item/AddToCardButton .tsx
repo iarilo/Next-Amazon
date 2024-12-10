@@ -13,14 +13,11 @@ const AddToCardButton: FC<{ product: IProduct; productId: number }> = ({
 	const { addToCart, removeFromCart } = useActionsRedux()
 	const { items } = useCart()
 
-	 //console.log('items =',items)
-	// console.log('product =',product)
-	// console.log('productId =',productId)
 
 	const currentElement = items.some(
 		(cartItem: ICartItem) => cartItem.product.id === productId,
 	)
-	// console.log('currentElement =',currentElement)
+	//console.log('currentElement =',currentElement)
 
 
 	const handleClick = () => {
@@ -39,6 +36,7 @@ const AddToCardButton: FC<{ product: IProduct; productId: number }> = ({
 
 <button onClick={handleClick} className={styles.AddToCardButton}>
     {currentElement ? <TfiShoppingCartFull /> : <TfiShoppingCart />}
+	
 </button>
 
    {/* -------------------------------- */}

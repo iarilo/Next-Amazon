@@ -2,11 +2,12 @@ import axios from 'axios'
 import Cookies from 'js-cookie'
 import { IAuthResponse } from 'store/user/store-user.interface'
 import { getContentType } from 'app/api.helper'
-import { removeFromreRreshToken, saveToStorage } from './auth.helper'
+import { getUserFromStorage, removeFromreRreshToken, saveToStorage } from './auth.helper'
 import { IEmailPassword } from 'store/user/store-user.interface'
 import { axiosClassic, instance } from 'app/api.interceptor'
 import { IUserData, IUser } from 'types/type-user.interface'
 import { createServerCookie } from 'services/cookies/cookie.helper'
+import { useActionsRedux } from 'store/hooks-reduxer/hooks-redux'
 
 
 
@@ -34,7 +35,7 @@ export const AuthService = {
 		// saveToStorage Запись  в общий localStorage
 		//console.log('Action.server_Login-Data: ',data)
 		//console.log('Action.server_Login-response: ',response)
-		// console.log('Action.server_Login-response-Data: ',response.data)
+		 //console.log('Action.server_Login-response-Data: ',response.data)
 
 		const token = Object.values(response.data)
 		const acces = token.map(ell => ell.accesToken)

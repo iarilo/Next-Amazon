@@ -12,12 +12,13 @@ interface IProfile {
 }
 const ComponentProfile: FC<IProfile> = ({ profile }) => {
 	const router = useRouter()
-	const { logout } = useActionsRedux()
+	const { logout,reset } = useActionsRedux()
 	const { name, email, phone, favorites } = profile
 
 	function click (){
 		logout()
-		router.push('/login')
+		//reset()
+		router.push('/')
 	}
 	return (
 		<div className={styles.container_ComponentProfile}>

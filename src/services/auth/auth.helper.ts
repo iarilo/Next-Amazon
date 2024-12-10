@@ -1,12 +1,15 @@
+import Cookies from 'js-cookie'
+import cookie from 'cookie' // for server
+import {
+	IAuthResponse,
+	ITokens,
+	ITokensServer,
+} from 'store/user/store-user.interface'
+import { NextRequest } from 'next/server'
+import { useActionsRedux } from 'store/hooks-reduxer/hooks-redux'
 
-import Cookies from 'js-cookie';
-import cookie from 'cookie'; // for server
-import { IAuthResponse, ITokens, ITokensServer } from 'store/user/store-user.interface'
-import { NextRequest } from 'next/server';
 
-
-
-export   async function  arrayToken(data: ITokens) {
+export async function arrayToken(data: ITokens) {
 	const Array: ITokens[] = Object.values(data)
 	const accesToken = Array.map((token: ITokens) => token.accesToken)
 	const refreshToken = Array.map((token: ITokens) => token.refreshToken)
@@ -17,7 +20,7 @@ export   async function  arrayToken(data: ITokens) {
 
 // Запись токена клиент
 export const saveTokenStorage = async (data: ITokens) => {
-	console.log('saveTokenStorage - accesToken =',data)
+	console.log('saveTokenStorage - accesToken =', data)
 
 	const tokensArray = await arrayToken(data)
 	const { accesToken, refreshToken } = tokensArray
@@ -25,14 +28,18 @@ export const saveTokenStorage = async (data: ITokens) => {
 	Cookies.set('refreshToken', refreshToken.join(''))
 }
 
-
-
 // Запись  в общий localStorage
 //  IAuthResponse:  user: IUser,  accessToken: string ,refreshToken: string
 export const saveToStorage = async (data: IAuthResponse) => {
 	//console.log('SaveToStorage-Data = ',data)
-	   await saveTokenStorage(data)
-	  localStorage.setItem('userLoc', JSON.stringify(data.userI))
+
+	if (data.role === undefined) {
+		await saveTokenStorage(data)
+		localStorage.setItem('userLoc', JSON.stringify( {userI:data.userI}  ))
+	}
+	await saveTokenStorage(data)
+	localStorage.setItem('userLoc', JSON.stringify({ userI:data.userI, roleLoc: data.role}))
+	
 }
 
 // Получение токена клиент
@@ -44,6 +51,15 @@ export const getAccessToken = async () => {
 
 // Получаю пользователя из Хранилища
 export const getUserFromStorage = async () => {
+	 const userData =  await JSON.parse(localStorage.getItem('userLoc') || '{}')
+   return userData
+}
+
+export const getRoleFromStorage = async () => {
+	return JSON.parse(localStorage.getItem('userRole') || '{}')
+}
+
+export const getUserFromId = () => {
 	return JSON.parse(localStorage.getItem('userLoc') || '{}')
 }
 
@@ -90,7 +106,8 @@ export const setCookiesOnServer = (res: { setHeader: (arg0: string, arg1: string
 export const removeFromStorage = () => {
 	Cookies.remove('accesToken')
 	Cookies.remove('refreshToken')
-	localStorage.removeItem('user')
+	// localStorage.removeItem('user')
+	localStorage.clear()
 }
 
 export const removeFromreRreshToken = () => {

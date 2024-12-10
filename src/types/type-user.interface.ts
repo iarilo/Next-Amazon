@@ -17,7 +17,8 @@ export interface IUserData {
 	email: string
 	avatarPath?: string
 	phone?: string
-	password?: string
+	password?: string,
+	
 }
 
 export interface IFullUser extends IUser {
@@ -25,6 +26,10 @@ export interface IFullUser extends IUser {
 	orders: IOrder[]
 	Error: string
 	review: number[]
+	role:{
+		id: number,
+	    name: string
+	}
 }
 
 export interface IMayProfile {

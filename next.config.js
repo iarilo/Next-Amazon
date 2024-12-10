@@ -24,6 +24,7 @@ const nextConfig = {
             {protocol:"https", hostname: "cojo.ru" },
             {protocol:"https", hostname: "ru.pngtree.com" },
             {protocol:"https", hostname: "img.freepik.com" },
+            {protocol:"https", hostname: "twam.ru" },
           
                     
 

@@ -28,7 +28,7 @@ const rootReducer = combineReducers({
    
   // carousel: '',
   cart: cartSlice.reducer,
-  user:  userSlice 
+  userStor:  userSlice 
 })
 
 

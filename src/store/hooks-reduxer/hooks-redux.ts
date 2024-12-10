@@ -26,7 +26,11 @@ export const useActionsRedux = () => {
 export const useTupedSelector: TypedUseSelectorHook<TypeRootState> = useSelector
 
 // Хук авторизации
-export const useAuth = () => useTupedSelector(state => state.user)
+export const useAuth = () => useTupedSelector((state) =>{ 
+	 //const role = state.user.role
+	 const user = state.userStor
+return  user
+})
 
 // Profile хук
 //const {user} = useAuth()
@@ -36,7 +40,7 @@ export async function GetUserProfile() {
 }
 
 export const useProfile = () => {
-	const { data: profileData, error } = useQuery({
+	const { data: profileData, error, isLoading } = useQuery({
 		queryKey: ['get profile'],
 		queryFn:  () => GetUserProfile(),
         //enabled: !!user,
@@ -49,8 +53,8 @@ export const useProfile = () => {
 		}
 	}, [error])
 
-	//console.log('useProfile Data =', profileData)
-	return { profile: profileData  }
+	//console.log('useProfile Data =', profileData?.data)
+	return { profile: profileData,isLoading,error  }
 }
 
 // Card

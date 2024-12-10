@@ -10,6 +10,8 @@ export const UserService = {
         url: `${USER}/profile`,
         method: 'GET'
      }) 
+
+     //console.log('Profile=',profile.data.id)
      return  profile
     },
 

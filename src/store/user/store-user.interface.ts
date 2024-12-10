@@ -25,6 +25,7 @@ export interface ITokens {
     accesToken: string
     refreshToken: string
     userI: IUser
+    role: string
 };
 // Токен на сервере
 export interface ITokensServer {
@@ -39,6 +40,8 @@ export interface IInitialState {
    
     user: IUserState | null
     isLoading: boolean
+    role : string 
+
 };
 // Емэйл и пароль 
 export interface IEmailPassword{
@@ -47,6 +50,11 @@ export interface IEmailPassword{
 };
  // Ответ аутентификации
 export interface IAuthResponse extends ITokens{
+    // userData:{
+	// 	user:IUser, 
+	// 	role?:string
+	// }
+	 role: string 
      userI: IUser
 };
 

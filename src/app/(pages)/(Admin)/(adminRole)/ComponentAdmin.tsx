@@ -1,13 +1,13 @@
 'use client'
 import React, { useState, useEffect } from 'react'
-import style from './page.module.css'
+import style from '../admin/page.module.css'
 import {useActionsRedux,useAuth,useTupedSelector,} from 'store/hooks-reduxer/hooks-redux'
 import { useRouter } from 'next/navigation'
 import FormloginAuth from '../(Form)/formloginAuth'
 import CheckRolle from 'store/providers/auth-provider/CheckRolle'
 
-const Admin = () => {
-	const { login,logout } = useActionsRedux()
+const ComponentAdmin= () => {
+  const { login,logout } = useActionsRedux()
 	const router = useRouter()
 	const select = useTupedSelector(ell => ell.userStor)
 	const userData = useAuth()
@@ -21,7 +21,7 @@ const Admin = () => {
 
 
 	return (
-		<CheckRolle allowedRoles = {'admin'}>
+		// <CheckRolle allowedRoles = {'admin'}>
 			<div className={style.admin}>
 			<h3> Admin </h3>
 			<p style={{ color: '#000000' }}>Данные пользователя</p>
@@ -64,8 +64,9 @@ const Admin = () => {
 
 			</div>
 		</div>
-		</CheckRolle>
+
+		// {/* </CheckRolle> */}
 	)
 }
 
-export default Admin
+export default ComponentAdmin
